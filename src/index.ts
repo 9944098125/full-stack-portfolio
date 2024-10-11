@@ -7,6 +7,7 @@ import userRoute from "./routes/user";
 import skillsRoute from "./routes/skills";
 import projectsRoute from "./routes/projects";
 import experiencesRoute from "./routes/experiences";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -37,8 +38,19 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 	});
 });
 
+async function connect() {
+	try {
+		await mongoose.connect(process.env.MONGO_URI!);
+		console.log("Connected to MongoDB");
+	} catch (err: any) {
+		console.log(err.message);
+		process.exit(1);
+	}
+}
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
+	connect();
 	console.log(`Server is running on http://localhost:${port}`);
 });

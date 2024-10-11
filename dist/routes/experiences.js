@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const experiences_1 = require("../controllers/experiences");
+const router = (0, express_1.Router)();
+router.route("/:userId").post(experiences_1.createExperience);
+router.route("/:experienceId").patch(experiences_1.updateExperience);
+router.route("/").get(experiences_1.getExperiences);
+router.route("/:experienceId").delete(experiences_1.deleteExperience);
+exports.default = router;
