@@ -1,13 +1,9 @@
 import express from "express";
-import {
-	createUser,
-	getBasicUserDetails,
-	updateUser,
-} from "../controllers/user";
+import { getBasicUserDetails, login, updateUser } from "../controllers/user";
 
 const router = express.Router();
 
-router.route("/createUser").post(createUser);
+router.route("/login").post(login as express.RequestHandler);
 
 router.route("/getUserDetails").get(getBasicUserDetails);
 

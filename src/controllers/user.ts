@@ -1,34 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/User";
-import Skills from "../models/Skills";
-import Projects from "../models/projects";
-import Experience from "../models/Experience";
+import jwt from "jsonwebtoken";
 
-export const createUser = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	try {
-		const { fullName, email, occupation, age, resume } = req.body;
-		const newUser = new User({
-			fullName,
-			email,
-			occupation,
-			age,
-			resume,
-		});
-		await newUser.save();
-		res.status(201).json({
-			message: `Congrats ${
-				fullName?.split(" ")[0]
-			}, you are registered Successfully !`,
-			user: newUser,
-		});
-	} catch (err: any) {
-		next(err);
-	}
-};
 export const updateUser = async (
 	req: Request,
 	res: Response,
@@ -74,6 +47,44 @@ export const getBasicUserDetails = async (
 				age: user?.age,
 				resume: user?.resume,
 			},
+		});
+	} catch (err: any) {
+		next(err);
+	}
+};
+export const login = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	try {
+		const { email, password } = req.body;
+		const user = await User.findOne({ email });
+		if (!user) {
+			return res.status(404).json({
+				message: "User not found",
+			});
+		}
+		if (user?.password !== password) {
+			return res.status(401).json({
+				message: "Invalid password",
+			});
+		}
+		const token = jwt.sign(
+			{ userId: user?._id },
+			process.env.SECRET_TOKEN as string
+		);
+		res.status(200).json({
+			message: "Login successful",
+			user: {
+				_id: user?._id,
+				age: user?.age,
+				resume: user?.resume,
+				occupation: user?.occupation,
+				name: user?.fullName,
+				email: user?.email,
+			},
+			token: token,
 		});
 	} catch (err: any) {
 		next(err);
