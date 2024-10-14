@@ -58,8 +58,7 @@ exports.getBasicUserDetails = getBasicUserDetails;
 const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
-        const user = yield User_1.default.findOne({ email });
-        console.log(user);
+        const user = yield User_1.default.findOne({ email: email.toLowerCase() });
         if (!user) {
             return res.status(404).json({
                 message: "User not found",

@@ -59,8 +59,7 @@ export const login = async (
 ) => {
 	try {
 		const { email, password } = req.body;
-		const user = await User.findOne({ email });
-		console.log(user);
+		const user = await User.findOne({ email: email.toLowerCase() });
 		if (!user) {
 			return res.status(404).json({
 				message: "User not found",
