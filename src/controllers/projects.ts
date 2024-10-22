@@ -25,7 +25,7 @@ export const createProject = async (
 		await user?.save();
 		res.status(201).json({
 			message: `Congrats ${
-				user?.fullName?.split(" ")[0]
+				user?.name?.split(" ")[0]
 			}, you are registered Successfully !`,
 			project: newProject,
 		});

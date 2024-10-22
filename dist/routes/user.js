@@ -8,5 +8,5 @@ const user_1 = require("../controllers/user");
 const router = express_1.default.Router();
 router.route("/login").post(user_1.login);
 router.route("/getUserDetails").get(user_1.getBasicUserDetails);
-router.route("/:userId").patch(user_1.updateUser);
+router.route("/updateUser").patch(user_1.updateUser);
 exports.default = router;

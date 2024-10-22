@@ -17,17 +17,17 @@ const User_1 = __importDefault(require("../models/User"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const updateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.params;
-        const { fullName, email, occupation, age, resume } = req.body;
+        const { userId } = req.query;
+        const { name, email, occupation, age, summary } = req.body;
         const updatedUser = yield User_1.default.findByIdAndUpdate(userId, {
-            fullName,
+            name,
             email,
             occupation,
             age,
-            resume,
+            summary,
         }, { new: true });
         res.status(200).json({
-            message: `${fullName === null || fullName === void 0 ? void 0 : fullName.split(" ")[0]} your details have been updated successfully`,
+            message: `${name === null || name === void 0 ? void 0 : name.split(" ")[0]} your details have been updated successfully`,
             user: updatedUser,
         });
     }
@@ -38,11 +38,11 @@ const updateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 exports.updateUser = updateUser;
 const getBasicUserDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield User_1.default.findOne({ _id: req.params.userId });
+        const user = yield User_1.default.findOne({ _id: req.query.userId });
         res.status(200).json({
             message: "User details fetched successfully",
             user: {
-                fullName: user === null || user === void 0 ? void 0 : user.fullName,
+                name: user === null || user === void 0 ? void 0 : user.name,
                 email: user === null || user === void 0 ? void 0 : user.email,
                 occupation: user === null || user === void 0 ? void 0 : user.occupation,
                 age: user === null || user === void 0 ? void 0 : user.age,
@@ -77,7 +77,7 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
                 age: user === null || user === void 0 ? void 0 : user.age,
                 resume: user === null || user === void 0 ? void 0 : user.resume,
                 occupation: user === null || user === void 0 ? void 0 : user.occupation,
-                name: user === null || user === void 0 ? void 0 : user.fullName,
+                name: user === null || user === void 0 ? void 0 : user.name,
                 email: user === null || user === void 0 ? void 0 : user.email,
             },
             token: token,

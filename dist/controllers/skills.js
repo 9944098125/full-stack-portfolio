@@ -31,7 +31,7 @@ const createSkill = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         user === null || user === void 0 ? void 0 : user.skills.push(newSkill === null || newSkill === void 0 ? void 0 : newSkill._id);
         yield (user === null || user === void 0 ? void 0 : user.save());
         res.status(201).json({
-            message: `Congrats ${(_a = user === null || user === void 0 ? void 0 : user.fullName) === null || _a === void 0 ? void 0 : _a.split(" ")[0]}, you have create a new skill Successfully !`,
+            message: `Congrats ${(_a = user === null || user === void 0 ? void 0 : user.name) === null || _a === void 0 ? void 0 : _a.split(" ")[0]}, you have create a new skill Successfully !`,
             skill: newSkill,
         });
     }

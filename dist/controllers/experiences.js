@@ -34,7 +34,7 @@ const createExperience = (req, res, next) => __awaiter(void 0, void 0, void 0, f
         user === null || user === void 0 ? void 0 : user.experience.push(newExperience === null || newExperience === void 0 ? void 0 : newExperience._id);
         yield (user === null || user === void 0 ? void 0 : user.save());
         res.status(201).json({
-            message: `Congrats ${(_a = user === null || user === void 0 ? void 0 : user.fullName) === null || _a === void 0 ? void 0 : _a.split(" ")[0]}, you are registered Successfully !`,
+            message: `Congrats ${(_a = user === null || user === void 0 ? void 0 : user.name) === null || _a === void 0 ? void 0 : _a.split(" ")[0]}, you are registered Successfully !`,
             experience: newExperience,
         });
     }
