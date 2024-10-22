@@ -44,6 +44,7 @@ export const getBasicUserDetails = async (
 				name: user?.name,
 				email: user?.email,
 				occupation: user?.occupation,
+				summary: user?.summary,
 				age: user?.age,
 				resume: user?.resume,
 			},

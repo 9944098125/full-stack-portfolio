@@ -45,6 +45,7 @@ const getBasicUserDetails = (req, res, next) => __awaiter(void 0, void 0, void 0
                 name: user === null || user === void 0 ? void 0 : user.name,
                 email: user === null || user === void 0 ? void 0 : user.email,
                 occupation: user === null || user === void 0 ? void 0 : user.occupation,
+                summary: user === null || user === void 0 ? void 0 : user.summary,
                 age: user === null || user === void 0 ? void 0 : user.age,
                 resume: user === null || user === void 0 ? void 0 : user.resume,
             },
