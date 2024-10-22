@@ -7,6 +7,6 @@ router.route("/login").post(login as express.RequestHandler);
 
 router.route("/getUserDetails").get(getBasicUserDetails);
 
-router.route("/:userId").patch(updateUser);
+router.route("/updateUser").patch(updateUser);
 
 export default router;

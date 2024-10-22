@@ -8,22 +8,22 @@ export const updateUser = async (
 	next: NextFunction
 ) => {
 	try {
-		const { userId } = req.params;
-		const { fullName, email, occupation, age, resume } = req.body;
+		const { userId } = req.query;
+		const { name, email, occupation, age, summary } = req.body;
 		const updatedUser = await User.findByIdAndUpdate(
 			userId,
 			{
-				fullName,
+				name,
 				email,
 				occupation,
 				age,
-				resume,
+				summary,
 			},
 			{ new: true }
 		);
 		res.status(200).json({
 			message: `${
-				fullName?.split(" ")[0]
+				name?.split(" ")[0]
 			} your details have been updated successfully`,
 			user: updatedUser,
 		});
@@ -37,11 +37,11 @@ export const getBasicUserDetails = async (
 	next: NextFunction
 ) => {
 	try {
-		const user = await User.findOne({ _id: req.params.userId });
+		const user = await User.findOne({ _id: req.query.userId });
 		res.status(200).json({
 			message: "User details fetched successfully",
 			user: {
-				fullName: user?.fullName,
+				name: user?.name,
 				email: user?.email,
 				occupation: user?.occupation,
 				age: user?.age,
@@ -81,7 +81,7 @@ export const login = async (
 				age: user?.age,
 				resume: user?.resume,
 				occupation: user?.occupation,
-				name: user?.fullName,
+				name: user?.name,
 				email: user?.email,
 			},
 			token: token,

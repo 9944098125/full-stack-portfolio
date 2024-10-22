@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
 	{
-		fullName: {
+		name: {
 			type: String,
 		},
 		email: {
@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema(
 			type: String,
 		},
 		occupation: {
+			type: String,
+		},
+		summary: {
 			type: String,
 		},
 		age: {
@@ -38,6 +41,9 @@ const userSchema = new mongoose.Schema(
 				ref: "Experience",
 			},
 		],
+		image: {
+			type: String,
+		},
 	},
 	{ timestamps: true }
 );
