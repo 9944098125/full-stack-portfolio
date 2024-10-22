@@ -18,13 +18,14 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const updateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.query;
-        const { name, email, occupation, age, summary } = req.body;
+        const { name, email, occupation, age, summary, image } = req.body;
         const updatedUser = yield User_1.default.findByIdAndUpdate(userId, {
             name,
             email,
             occupation,
             age,
             summary,
+            image,
         }, { new: true });
         res.status(200).json({
             message: `${name === null || name === void 0 ? void 0 : name.split(" ")[0]} your details have been updated successfully`,
@@ -48,6 +49,7 @@ const getBasicUserDetails = (req, res, next) => __awaiter(void 0, void 0, void 0
                 summary: user === null || user === void 0 ? void 0 : user.summary,
                 age: user === null || user === void 0 ? void 0 : user.age,
                 resume: user === null || user === void 0 ? void 0 : user.resume,
+                image: user === null || user === void 0 ? void 0 : user.image,
             },
         });
     }

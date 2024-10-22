@@ -9,7 +9,7 @@ export const updateUser = async (
 ) => {
 	try {
 		const { userId } = req.query;
-		const { name, email, occupation, age, summary } = req.body;
+		const { name, email, occupation, age, summary, image } = req.body;
 		const updatedUser = await User.findByIdAndUpdate(
 			userId,
 			{
@@ -18,6 +18,7 @@ export const updateUser = async (
 				occupation,
 				age,
 				summary,
+				image,
 			},
 			{ new: true }
 		);
@@ -47,6 +48,7 @@ export const getBasicUserDetails = async (
 				summary: user?.summary,
 				age: user?.age,
 				resume: user?.resume,
+				image: user?.image,
 			},
 		});
 	} catch (err: any) {
